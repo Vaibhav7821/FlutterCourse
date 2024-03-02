@@ -1,0 +1,340 @@
+Program1.dart
+
+class Test {
+  final int x;
+  final int y;
+
+  const Test(this.x, this.y){
+    print("In Constant Consturctor");
+  }
+}
+
+void main(){
+  Test obj = Test(10,20);
+  print(obj.x);
+}
+
+/*
+OP: 
+  Error:
+      in the above code constant constructor cant have body,
+      either remove the const keyword or the body
+
+  */ 
+
+
+Program2.dart
+
+class Employee {
+  int? empId;
+  String? empName;
+
+  Employee() {
+
+  }
+  Employee(int empId, String empname) {
+
+  }
+}
+
+void main() {
+  Employee obj = new Employee();
+}
+
+/*
+OP:
+    Error :
+          Cant use Employee more than once it will already defined.
+          In the above code,
+          in dart same name of constructors cant aloowed
+          we have to give different name for that constructors.
+          like Employee.x()
+          Employee.y()
+
+*/
+
+Program3.dart
+
+class Demo {
+  final int? x;
+  final String? str;
+
+  const Demo(this.x, this.str);
+}
+
+void main() {
+  Demo obj1 = const Demo(10, "Core2web");
+  print(obj1.hashCode);
+
+  Demo obj2 = const Demo(10, "Biencaps");
+
+  print(obj2.hashCode);
+}
+/*
+OP :
+396746865
+513787238
+
+Explaination:
+
+    In the above code hashcode two objects are different,
+    because the passing arguments for const object are different so it can make two separate objects.
+    but when we pass same arguments when we are creating object of that class at that it will makes same object for bith
+
+    so the const constructor is used
+*/
+
+
+Program4.dart
+
+class Company {
+  int empCount;
+  String empName;
+
+  Company(this.empCount, [this.empName = "Biencaps"]);
+
+  void compInfo() {
+    print(empCount);
+    print(empName);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(100);
+  Company obj2 = new Company(200, "Pubmatic");
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+/*
+OP : 
+    100
+    Biencaps
+    200
+    Pubmatic
+
+    **************
+    
+    Explaination :
+
+        In the above code, The optional parameters concept is used for passing parameters
+        optional parameters means we can give the default values int paramenter side
+        and when we cant pass that type of argument the it can takes that default value
+        and when we pass at that it repplace that default value.
+        
+        And this concept in dart called as optional Parameters
+*/
+          
+
+Program5.dart
+
+class Company {
+  int? x;
+  String? str;
+
+  Company(this.x, {this.str = "Core2web"});
+
+  void compInfo() {
+    print(x);
+    print(str);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(100);
+  Company obj2 = new Company(200, "Incubator");
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+/*
+OP :
+    Error : 
+          too many positional arguments 1 allowed but 2 found
+
+    Explaination : 
+
+          At the parameter side when we give the default value in curly braces {}
+          at that we cant pass argument of that type to that method
+
+          here dart uses the Default Parameters concept 
+*/  
+
+
+Program6.dart
+
+
+
+class Company {
+  int? empCount;
+  String? compName;
+
+  Company({this.empCount, this.compName = "Deloitte"});
+
+  void compInfo() {
+    print(empCount);
+    print(compName);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(empCount: 100, compName: "Veritas");
+
+  Company obj2 = new Company(compName: "Pubmatic", empCount: 200);
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+/*
+OP :
+    100
+    Veritas
+    200
+    Pubmatic
+
+    ***************
+
+    Explaination : 
+            Here in the above code named parametrs concept is used.
+            we can give the default values also or we can change the sequence of 
+            the aruments at the timem passing. 
+
+*/
+
+
+Program7.dart
+
+class Point {
+  int x;
+  int y;
+}
+
+void main() {
+  Point obj = Point();
+}
+
+/*
+    OP:
+      Error : 
+        both variables are must be initialized. 
+        because both the variables are non nullable
+        make it nullable or initialize it.
+
+        */
+
+Program8.dart
+
+
+class Player {
+  int? jerNo;
+  String? pName;
+
+  const Player(this.jerNo, this.pName);
+}
+
+void main(){
+  Player obj = const Player(45,"Rohit");
+}
+/*
+
+OP:
+      Error : 
+            In the const constructor the varialbles are must be deaclared as final
+*/
+
+Program9.dart
+
+int a = 10;
+
+class Test {
+  int x = 20;
+  int y = 20;
+  static num z = 30;
+
+  Test(this.x, this.y, this.a);
+
+  void fun() {
+    print(a);
+    print(x);
+    print(y);
+  }
+}
+
+void main() {
+  Test obj = Test(10, 30, 40);
+  obj.fun();
+}
+
+/*
+OP : 
+      Error : 
+            'a' filed is not part of the instance 
+            we cant access the static field in instance space
+*/ 
+
+Program10.dart
+
+class Demo {
+  Demo() {
+    print("In demo");
+  }
+
+  factory Demo() {
+    print("In demo Factory");
+    return Demo();
+  }
+}
+
+void main() {
+  Demo obj = new Demo();
+}
+
+/*
+OP : 
+      Error : 
+          same name of constructors are not allowed in dart.
+
+      Explaination : 
+            In tha dart same name of constructors are not allowed.
+            try to give different name to constructors.
+*/
+
+Prgram11.dart
+
+class Test {
+  Test._private() {
+    print("In Demo");
+  }
+
+  factory Test() {
+    print("In Demo Factory");
+    return Test._private();
+  }
+}
+
+void main() {
+  Test obj = new Test();
+  Test obj1 = new Test();
+  print(obj.hashCode);
+  print(obj1.hashCode);
+}
+
+/*
+OP : 
+      In Demo Factory
+      In Demo
+
+      *********************
+
+      Explaination :
+
+            here in above code factory constructor concept is used.
+            we cant create object of private constructor
+            so factory constructor has access to create the object of private constrcutor
+
+            and also it will returns the object of Child class private constructor.
+            also we can achieve singleton design pattern using factory constructor. 
+      */

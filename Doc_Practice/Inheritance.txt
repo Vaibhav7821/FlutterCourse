@@ -1,0 +1,365 @@
+Program1.dart
+
+class Test {
+  int x = 10;
+  Test(this.x);
+}
+
+class Test2 extends Test {
+  Test2(super.x);
+}
+
+void main() {
+  Test2 obj = Test2(10);
+  Test obj2 = Test(30);
+  obj.x = 19;
+
+  print(obj.x);
+  print(obj2.x);
+}
+
+/*
+OP : 
+    19
+    30
+
+    Explaination : 
+        here Test class can be inherited in Test2 class
+        when we careate object of Test2 class at that time we can pass value it will assign to thew parent 
+        and when we create object of Test and pass value at that time it can assigns  to that object only 
+        when we print that two values are separated of two objects.
+
+        */
+
+
+Program2.dart
+
+class Test {
+  int x = 30;
+}
+
+class Test2 extends Test {
+  int x;
+  Test2(this.x);
+
+  void gun() {
+    this.x = 8;
+  }
+
+  void fun() {
+    print(this.x);
+    print(super.x);
+  }
+}
+
+void main() {
+  Test2 obj = Test2(10);
+  obj.gun();
+  obj.fun();
+}
+
+/*
+OP :
+      8
+      30
+
+      Explaination : 
+             here in the above code
+             we can create object of child class at that time when we pass value it assigns to that child object x
+             when we call gun function it will replace the value of x in that object.
+             and when we call fun function it will print the Child object x value using this and 
+             using super it will prints parent class x value.
+
+             */ 
+
+
+Program3.dart
+
+class Test {
+  int x = 30;
+  int y = 30;
+}
+
+class Test2 extends Test {
+  int x;
+  Test2(this.x);
+
+  void gun() {
+    this.x = 8;
+    this.y = 19;
+  }
+
+  void fun() {
+    print(super.x);
+    print(super.y);
+  }
+}
+
+void main() {
+  Test2 obj = Test2(10);
+  obj.gun();
+  obj.fun();
+}
+
+/*
+OP: 
+    30
+    19
+
+    Explaination : 
+            The Test class is inherited in the Test2 class 
+            when we create object of Child class and pass value it will initialize value to in that object filed x
+            and when we call gun function at that time it will assigns the vvalues to both fileds x and y bit 
+            here y field is inherited from parent class so it will assigns the value to parent y filed.
+            when we call fun function at that time it will prints
+            the Parents values.
+            */
+
+Program4.dart
+
+class Test {
+  int x;
+  int? y;
+
+  Test({required this.x, this.y});
+}
+
+class Test2 extends Test {
+  Test2(int x, int y) : super(x: 88) {
+    print(x);
+  }
+
+  void fun() {
+    print(this.x);
+    print(super.x);
+  }
+}
+
+void main() {
+  Test2 obj = Test2(19,20);
+  obj.fun();
+}
+
+/*
+OP : 
+      19
+      88
+      88
+
+      Explaination : 
+            When we create object od Child class and pass values (19,20) at that time it will copies the 
+            values in Test2's local variables and from that constructor the parents constructors will be callled
+            and passes 88 value and it will initialize the value in Parent constructor
+            and prints the local variable x value. 
+
+            and when we call fun function at the time it will prints the Parent x value and using
+            this.x also and super.x 
+            */
+
+
+Program5.dart
+
+class Test {
+  int x = 20;
+  String str = "Core2web";
+
+  void parentMethod() {
+    print(x);
+    print(str);
+  }
+}
+
+class Test2 extends Test {
+  int x = 10;
+  String str = "Incubator";
+
+  void childMethod() {
+    print(x);
+    print(str);
+  }
+}
+
+void main() {
+  Test2 obj = Test2();
+  obj.parentMethod();
+  obj.childMethod();
+}
+/*
+OP : 
+      10
+      Incubator
+      10
+      Incubator
+
+      Explaination : 
+              in the above code parentMethod will be inherited in child class 
+              and childMethod is of Child Class 
+              and when we call both methods 
+              at that time parentMethod will prints the nearest values.
+              and child will prints the in that class fields.
+              
+              */
+
+
+Program6.dart
+
+class Test {
+  int? x;
+
+  Test(this.x) {
+    print("In test");
+  }
+}
+
+class Test2 extends Test {
+  int? y;
+
+  Test2(this.y, int x) : super(x);
+}
+
+class Test3 extends Test2 {
+  int? z;
+  Test3(this.z, int y, int x) : super(y, x) {
+    print("In Test3");
+  }
+}
+
+void main() {
+  Test3 obj = Test3(10,20,30);
+}
+
+/*
+OP : 
+      In test
+      In Test3
+
+      Explaination : 
+            When we create object of Test3 and pass arguments at that time Test3 constructor can copy that values in it 
+            in Test3 z value will stored and 20 and 30 values will be pass to the Test2 construcotr because Test2 is parent of Test3
+            and 30 value will pass to the Test constructor and initilize the value x to field x
+
+            this is concept of Constructor chaining.
+*/
+
+
+Program7.dart
+
+class Demo1 {
+  int x;
+  Demo1(this.x);
+}
+
+class Demo2 extends Demo1 {
+  Demo2(super.x);
+
+  void fun() {
+    print(x);
+  }
+}
+
+void main() {
+  Demo1 obj = Demo2(10);
+  obj.fun();
+}
+
+/*
+OP : 
+    Error : 
+        method fun is not defined for the Demo1 class 
+        as per java when we creates object Child and reference of Parent the
+        at that time we can call only those methods that will be present in Parent class 
+*/
+
+Program8.dart
+
+
+class Parent {
+  Parent() {
+    print("In Parent Constructor");
+  }
+}
+
+class Child extends Parent {
+  Child() {
+    super();
+    print("In Child Constructor");
+  }
+}
+
+void main() {
+  Child obj = new Child();
+}
+
+/*
+OP : 
+      Error : 
+            we cant call super() like this 
+            it must have call method to makes object callable 
+            then we can call like this
+  */
+
+Program9.dart
+
+
+class Test {
+  int? x;
+  static int y = 20;
+  Test.initX(this.x);
+
+  static void changeY() {
+    y = 30;
+  }
+}
+
+class Test2 extends Test {
+  Test2(int x) : super.initX(x);
+}
+
+void main() {
+  Test2 obj = Test2(40);
+  Test2.changeY();
+
+  print(Test2.y);
+}
+
+/*
+OP : 
+    Error:
+          changeY and Y are not defined.ArgumentError
+
+    Explaination :
+
+          static methods are class methods that will never come in child class 
+*/
+
+
+Program10.dart
+
+abstract class Demo1 {
+  factory Demo1() {
+    return Demo2();
+  }
+}
+
+class Demo2 implements Demo1 {
+  Demo2() {
+    print("Demo2");
+  }
+}
+
+void main() {
+  Demo1 obj = new Demo1();
+}
+
+/*
+OP : 
+      Demo2
+
+
+      Explaination : 
+            here we cannot creates the object of abstract class 
+            so using factory we can create the childs class object 
+                       
+*/
+
+

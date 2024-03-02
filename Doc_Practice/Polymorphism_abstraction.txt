@@ -1,0 +1,363 @@
+Program1.dart
+
+class Company {
+  void companyName() {
+    print("Google");
+  }
+}
+
+class Employee extends Company {
+  void companyName() {
+    print("Apple");
+  }
+}
+
+void main() {
+  Company obj = Employee();
+  obj.companyName();
+}
+/*
+OP : 
+      Apple
+
+      Explaination ; 
+              when parents reference and child object at that time 
+              on that object childs method will be called.
+*/
+
+
+Program2.dart
+
+
+class Demo {
+  void fun();
+}
+
+class Demo1 implements Demo {
+  void fun() {}
+}
+
+void main() {
+  Demo obj = Demo1();
+}
+/*
+OP : 
+    Error: 
+          Demo class has to give body to the method fun or marks abstract
+
+    Explaination : 
+        concrete class has must body to its methods 
+        */
+
+program3.dart
+
+class Test {
+  double x = 10.7;
+
+  num fun() {
+    return x;
+  }
+}
+
+class Child extends Test {
+  int y = 9;
+  int fun() {
+    var x = super.fun();
+    print(x.runtimeType);
+    x = 10;
+    return 10;
+  }
+}
+
+void main() {
+  Child obj = new Child();
+  obj.fun();
+}
+
+/*
+OP : 
+      double
+
+      Explaination :
+            fun of Test returns the double field x 
+            and in child fun it will checks runTimetype of that varible 
+            so it will gives double.
+
+*/
+
+
+Program4.dart
+
+class Test {
+  int? x;
+  Test(this.x);
+
+  void fun() {
+    this.x = 99;
+  }
+}
+
+class Test2 extends Test {
+  int? x;
+  Test2(this.x, int y) : super(y);
+
+  void fun() {
+    print(x);
+    super.fun();
+    print(x);
+    print(super.x);
+  }
+}
+
+void main() {
+  Test2 obj = Test2(4, 6);
+  obj.fun();
+}
+
+/*
+OP: 
+4
+99
+6
+
+    Explaination : 
+          when fun method will called 
+          at that time it will print x from that class
+          and then it will call parent fun at that time it will assigns value to x = 99
+          and then print x the output will be latest.
+          and when print super.x at that time it will prints the parent x 
+
+          */
+
+Program5.dart
+
+class Test {
+  void fun() {
+    print("Test Class");
+  }
+
+  static void gun() {
+    print("In static test");
+  }
+}
+
+class Test2 extends Test {
+  @override
+  int fun() {
+    super.fun();
+    return 10;
+  }
+
+  @override
+  int gun() {
+    print("In test2 gun");
+    super.gun();
+  }
+}
+
+void main() {
+  Test2 obj = Test2();
+  obj.fun();
+}
+
+/*
+OP : 
+    Error : 
+          superclass has no method named gun
+          and also int gun return value is must.
+
+
+    Explaination ; 
+          parent class has static method gun 
+          so it cant be oerride in child class 
+          and we cannot call using super because static methods are called using only Class name
+          
+*/
+
+Program6.dart
+
+class Parent {
+  int x = 10;
+
+  Parent();
+
+  void getData() {
+    print(x);
+  }
+}
+
+class Child extends Parent {
+  double y = 10;
+  static String str = "core2web";
+
+  Child();
+
+  @override
+  int getData() {
+    print(y);
+    return 10;
+  }
+}
+
+void main() {
+  Child obj = new Child();
+  obj.getData();
+}
+
+/*
+OP : 
+  10.0
+
+    Explaination : 
+          on child object child getData() mwthod will be called 
+
+      */
+     
+
+Program7.dart
+
+abstract class Parent {
+  int x;
+  int y = 7;
+
+  Parent(this.x);
+
+  void printData() {
+    print(x);
+  }
+}
+
+class Child extends Parent {
+  Child(int x, int y) : super(y);
+
+  int printData() {
+    print(x);
+    print(y);
+    return 3;
+  }
+}
+
+void main() {
+  Child obj = new Child(6,7);
+  obj.printData();
+}
+
+/*
+OP: 
+      7
+      7
+
+
+      Explaination : 
+            both x and y will be accesed of Prent class 
+
+  */
+
+
+Program8.dart
+
+class Test {
+  int x = 6;
+  Test(){
+    print("Test");
+  }
+
+  void printData() {
+    print(x);
+  }
+}
+
+class Test2 extends Test {
+  int x = 9;
+  Test2() {
+    print("In Test2");
+  }
+}
+
+class Child extends Test implements Test2 {
+  int x = 7;
+  void printData() {
+    print(super.x);
+    super.printData();
+  } 
+}
+
+void main() {
+  Child obj = Child();
+  obj.printData();
+}
+
+/*
+OP : 
+      6
+      7
+
+      Explaination :
+            In child class instance varibles of interface cannot come 
+            
+
+      */
+
+Program9.dart
+
+abstract class Test {
+  void build();
+}
+
+class Test2 extends Test {
+  @override
+  void build() {
+    super.build();
+  }
+}
+
+/*
+OP : 
+    Error : 
+          superclass has no method named 'build';
+
+    Explaination : 
+          In abstract class absrtract method cant access using super
+        
+
+*/
+
+Program10.dart
+
+abstract class Test {
+  int x;
+  Test(this.x) {
+    print("In Constructor");
+  }
+
+  void fun() {
+    print("Fun");
+  }
+
+  void gun();
+}
+
+class Test2 extends Test {
+  Test2(super.x);
+
+  void gun() {
+    print("In Gun");
+  }
+}
+
+void main() {
+  Test2 obj = new Test2(10);
+  obj.fun();
+  obj.gun();
+}
+
+/*
+OP : 
+    In Constructor
+    Fun
+    In Gun
+
+    Explaination :
+          abstract method has to give body in child 
+          
+*/ 
