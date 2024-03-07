@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:to_do_list_app_adv_ui/models/todo_model.dart';
 import 'package:intl/intl.dart';
 
 class TODOAppUI extends StatefulWidget {
@@ -10,17 +9,35 @@ class TODOAppUI extends StatefulWidget {
   State<TODOAppUI> createState() => _TODOAppUIState();
 }
 
+class ToDoModelClass {
+  String title;
+  String description;
+  String date;
+
+  ToDoModelClass({
+    required this.title,
+    required this.description,
+    required this.date,
+  });
+}
+
 class _TODOAppUIState extends State<TODOAppUI> {
+  List<ToDoModelClass> cardList = [];
+
   ///Text Editing Controllers
   final TextEditingController dateController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  Future<void> showBottomSht(
-    bool doEdit,
-  ) async {
-    await showModalBottomSheet(
+  void addCard(int index, bool flag) {
+    if (flag == true) {
+      dateController.text = cardList[index].date.trim();
+      titleController.text = cardList[index].title.trim();
+      descriptionController.text = cardList[index].description.trim();
+    }
+
+    showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -188,6 +205,31 @@ class _TODOAppUIState extends State<TODOAppUI> {
                     backgroundColor: const Color.fromRGBO(89, 57, 241, 1),
                   ),
                   onPressed: () {
+                    if (flag == true) {
+                      setState(() {
+                        cardList[index].title = titleController.text.trim();
+                        cardList[index].description =
+                            descriptionController.text.trim();
+                        cardList[index].date = dateController.text.trim();
+                        // cardList.add(ToDoModelClass(
+                        //   title: titleController.text,
+                        //   description: descriptionController.text,
+                        //   date: dateController.text,
+                        // ));
+                      });
+                    } else {
+                      if (titleController.text.trim().isNotEmpty &&
+                          dateController.text.trim().isNotEmpty &&
+                          descriptionController.text.trim().isNotEmpty) {
+                        setState(() {
+                          cardList.add(ToDoModelClass(
+                            title: titleController.text.trim(),
+                            description: descriptionController.text.trim(),
+                            date: dateController.text.trim(),
+                          ));
+                        });
+                      }
+                    }
                     Navigator.of(context).pop();
                   },
                   child: Text(
@@ -286,7 +328,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                         ),
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: 10,
+                          itemCount: cardList.length,
                           itemBuilder: (context, index) {
                             return Slidable(
                               closeOnScroll: true,
@@ -303,6 +345,9 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                           height: 5,
                                         ),
                                         GestureDetector(
+                                          onTap: () {
+                                            addCard(index, true);
+                                          },
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
                                             height: 40,
@@ -324,6 +369,13 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                           height: 20,
                                         ),
                                         GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              cardList.removeAt(index);
+                                            });
+
+                                            ///deleteCard(index);
+                                          },
                                           child: Container(
                                             padding: const EdgeInsets.all(5),
                                             height: 40,
@@ -401,7 +453,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Lorem Ipsum is simply dummy industry. ",
+                                                cardList[index].title,
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 15,
@@ -412,7 +464,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                " Simply dummy text of the printing and type setting industry. Lorem Ipsum Lorem IpsumLorem. ",
+                                                cardList[index].description,
                                                 style: GoogleFonts.inter(
                                                     color: const Color.fromRGBO(
                                                         0, 0, 0, 0.7),
@@ -423,7 +475,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                "10 July 2023",
+                                                cardList[index].date,
                                                 style: GoogleFonts.inter(
                                                     color: const Color.fromRGBO(
                                                         0, 0, 0, 0.7),
@@ -462,7 +514,10 @@ class _TODOAppUIState extends State<TODOAppUI> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromRGBO(89, 57, 241, 1),
         onPressed: () async {
-          await showBottomSht(false);
+          addCard(-1, false);
+          titleController.clear();
+          descriptionController.clear();
+          dateController.clear();
         },
         child: const Icon(
           size: 50,

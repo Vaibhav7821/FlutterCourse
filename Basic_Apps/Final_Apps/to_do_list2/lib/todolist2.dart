@@ -445,7 +445,7 @@ class _ToDoListState extends State {
     } else {
       flag = true;
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
           title: Text(
             "To-do list",
