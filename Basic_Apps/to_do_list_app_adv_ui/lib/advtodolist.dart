@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'databaseconnections.dart';
 
 class TODOAppUI extends StatefulWidget {
   const TODOAppUI({super.key});
@@ -9,20 +10,24 @@ class TODOAppUI extends StatefulWidget {
   State<TODOAppUI> createState() => _TODOAppUIState();
 }
 
-class ToDoModelClass {
-  String title;
-  String description;
-  String date;
-
-  ToDoModelClass({
-    required this.title,
-    required this.description,
-    required this.date,
-  });
-}
-
 class _TODOAppUIState extends State<TODOAppUI> {
-  List<ToDoModelClass> cardList = [];
+  void accessList() async {
+    await createDatabase();
+    await getCardDetailsList();
+    setState(() {});
+  }
+
+  void updateList() async {
+    await getCardDetailsList();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    accessList();
+  }
+  // List<ToDoModelClass> cardList = [];
 
   ///Text Editing Controllers
   final TextEditingController dateController = TextEditingController();
@@ -32,9 +37,9 @@ class _TODOAppUIState extends State<TODOAppUI> {
 
   void addCard(int index, bool flag) {
     if (flag == true) {
-      dateController.text = cardList[index].date.trim();
-      titleController.text = cardList[index].title.trim();
-      descriptionController.text = cardList[index].description.trim();
+      dateController.text = listOfCards[index].date.trim();
+      titleController.text = listOfCards[index].title.trim();
+      descriptionController.text = listOfCards[index].description.trim();
     }
 
     showModalBottomSheet(
@@ -207,29 +212,40 @@ class _TODOAppUIState extends State<TODOAppUI> {
                   onPressed: () {
                     if (flag == true) {
                       setState(() {
-                        cardList[index].title = titleController.text.trim();
-                        cardList[index].description =
+                        listOfCards[index].title = titleController.text.trim();
+                        listOfCards[index].description =
                             descriptionController.text.trim();
-                        cardList[index].date = dateController.text.trim();
-                        // cardList.add(ToDoModelClass(
-                        //   title: titleController.text,
-                        //   description: descriptionController.text,
-                        //   date: dateController.text,
-                        // ));
+                        listOfCards[index].date = dateController.text.trim();
+
+                        ToDoModelClass obj = ToDoModelClass(
+                          title: titleController.text.trim(),
+                          description: descriptionController.text.trim(),
+                          date: dateController.text.trim(),
+                        );
+                        updateCardInDatabase(obj);
+                        updateList();
                       });
                     } else {
                       if (titleController.text.trim().isNotEmpty &&
                           dateController.text.trim().isNotEmpty &&
                           descriptionController.text.trim().isNotEmpty) {
                         setState(() {
-                          cardList.add(ToDoModelClass(
+                          // cardList.add(ToDoModelClass(
+                          //   title: titleController.text.trim(),
+                          //   description: descriptionController.text.trim(),
+                          //   date: dateController.text.trim(),
+                          // ));
+                          ToDoModelClass obj = ToDoModelClass(
                             title: titleController.text.trim(),
                             description: descriptionController.text.trim(),
                             date: dateController.text.trim(),
-                          ));
+                          );
+                          insertData(obj);
+                          updateList();
                         });
                       }
                     }
+
                     Navigator.of(context).pop();
                   },
                   child: Text(
@@ -328,7 +344,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                         ),
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: cardList.length,
+                          itemCount: listOfCards.length,
                           itemBuilder: (context, index) {
                             return Slidable(
                               closeOnScroll: true,
@@ -347,6 +363,9 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                         GestureDetector(
                                           onTap: () {
                                             addCard(index, true);
+                                            updateCardInDatabase(
+                                                listOfCards[index]);
+                                            updateList();
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
@@ -371,7 +390,10 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                         GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              cardList.removeAt(index);
+                                              //listOfCards.remove(index);
+                                              deleteCardFromDatabase(
+                                                  listOfCards[index]);
+                                              updateList();
                                             });
 
                                             ///deleteCard(index);
@@ -453,7 +475,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                cardList[index].title,
+                                                //cardList[index].title,
+                                                listOfCards[index].title,
                                                 style: GoogleFonts.inter(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 15,
@@ -464,7 +487,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                cardList[index].description,
+                                                //cardList[index].description,
+                                                listOfCards[index].description,
                                                 style: GoogleFonts.inter(
                                                     color: const Color.fromRGBO(
                                                         0, 0, 0, 0.7),
@@ -475,7 +499,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                cardList[index].date,
+                                                //cardList[index].date,
+                                                listOfCards[index].date,
                                                 style: GoogleFonts.inter(
                                                     color: const Color.fromRGBO(
                                                         0, 0, 0, 0.7),
@@ -515,6 +540,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
         backgroundColor: const Color.fromRGBO(89, 57, 241, 1),
         onPressed: () async {
           addCard(-1, false);
+          updateList();
           titleController.clear();
           descriptionController.clear();
           dateController.clear();
