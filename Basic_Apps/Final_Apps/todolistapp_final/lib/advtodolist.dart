@@ -323,8 +323,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
                 "Hello",
                 style: GoogleFonts.quicksand(
                   color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 28,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 29,
                 ),
               ),
             ),
@@ -338,7 +338,7 @@ class _TODOAppUIState extends State<TODOAppUI> {
                 style: GoogleFonts.quicksand(
                   color: Colors.white,
                   fontWeight: FontWeight.w800,
-                  fontSize: 35,
+                  fontSize: 37,
                 ),
               ),
             ),
@@ -359,8 +359,8 @@ class _TODOAppUIState extends State<TODOAppUI> {
                     BoxShadow(
                       offset: Offset(0, 0),
                       blurRadius: 5,
-                      spreadRadius: 8,
-                      color: Color.fromRGBO(255, 255, 255, 1),
+                      spreadRadius: 4,
+                      color: Color.fromRGBO(169, 169, 169, 1),
                     ),
                   ],
                 ),
@@ -567,12 +567,9 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                           ),
                                         ),
                                         Checkbox(
-                                        
                                           shape: RoundedRectangleBorder(
-                                            
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                                
                                           ),
                                           activeColor: const Color.fromARGB(
                                               255, 0, 255, 8),
@@ -589,7 +586,6 @@ class _TODOAppUIState extends State<TODOAppUI> {
                                             updateCardInDatabase(
                                                 allCards[index]);
                                             setState(() {});
-                                            
                                           },
                                         ),
                                       ],
