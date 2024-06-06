@@ -37,6 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   intl: ^0.19.0
+  pie_chart: ^5.4.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,16 @@ flutter:
   assets:
     - assets/splashImage.png
     - assets/medicine.png
+    - assets/category_img.png
+    - assets/about.png
+    - assets/category.png
+    - assets/chart.png
+    - assets/delet.png
+    - assets/food.png
+    - assets/fuel.png
+    - assets/shopping.png
+    - assets/wallet.png
+    - assets/transaction.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

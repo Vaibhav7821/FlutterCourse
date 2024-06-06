@@ -19,271 +19,266 @@ class _SignUpState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
+      body: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
+          const SizedBox(
+            height: 90,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 90,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Image.asset("assets/splashImage.png"),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              height: 500,
+              width: 320,
+              margin: const EdgeInsets.only(bottom: 30),
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
                 children: [
-                  Image.asset("assets/splashImage.png"),
-                ],
-              ),
-              Expanded(
-                child: Container(
-                  height: 500,
-                  width: 320,
-                  margin: const EdgeInsets.only(bottom: 30),
-                  padding: const EdgeInsets.only(top: 40),
-                  child: Column(
+                  Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Create your Account",
-                            style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16)),
-                          ),
-                        ],
+                      Text(
+                        "Create your Account",
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16)),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(0, 3),
+                                  color: Color.fromRGBO(0, 0, 0, 0.15)),
+                            ]),
+                        child: TextFormField(
+                          controller: nameController,
+                          cursorColor: Colors.yellow,
+                          decoration: InputDecoration(
+                              hintText: "Enter Name",
+                              hintStyle: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.red),
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      offset: Offset(0, 3),
-                                      color: Color.fromRGBO(0, 0, 0, 0.15)),
-                                ]),
-                            child: TextFormField(
-                              controller: nameController,
-                              cursorColor: Colors.yellow,
-                              decoration: InputDecoration(
-                                  hintText: "Enter Name",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      offset: Offset(0, 3),
-                                      color: Color.fromRGBO(0, 0, 0, 0.15)),
-                                ]),
-                            child: TextFormField(
-                              controller: userController,
-                              cursorColor: Colors.yellow,
-                              decoration: InputDecoration(
-                                  hintText: "Username",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                          ),
-                        ],
+                              )),
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(0, 3),
+                                  color: Color.fromRGBO(0, 0, 0, 0.15)),
+                            ]),
+                        child: TextFormField(
+                          controller: userController,
+                          cursorColor: Colors.yellow,
+                          decoration: InputDecoration(
+                              hintText: "Username",
+                              hintStyle: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.red),
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      offset: Offset(0, 3),
-                                      color: Color.fromRGBO(0, 0, 0, 0.15)),
-                                ]),
-                            child: TextFormField(
-                              controller: passController,
-                              cursorColor: Colors.yellow,
-                              decoration: InputDecoration(
-                                  hintText: "Password",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      blurRadius: 10,
-                                      spreadRadius: 0,
-                                      offset: Offset(0, 3),
-                                      color: Color.fromRGBO(0, 0, 0, 0.15)),
-                                ]),
-                            child: TextFormField(
-                              controller: confirmPassController,
-                              cursorColor: Colors.yellow,
-                              decoration: InputDecoration(
-                                  hintText: "Confirm Password",
-                                  hintStyle: const TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide:
-                                        const BorderSide(color: Colors.red),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                          ),
-                        ],
+                              )),
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 30),
-                            width: 300,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: const Color.fromRGBO(14, 161, 125, 1),
-                            ),
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(
-                                      builder: (BuildContext context) {
-                                    return const SignIn();
-                                  }));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromRGBO(14, 161, 125, 1),
-                                ),
-                                child: Text(
-                                  "Sign Up",
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 255, 255, 1),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16)),
-                                )),
-                          ),
-                        ],
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(0, 3),
+                                  color: Color.fromRGBO(0, 0, 0, 0.15)),
+                            ]),
+                        child: TextFormField(
+                          controller: passController,
+                          cursorColor: Colors.yellow,
+                          decoration: InputDecoration(
+                              hintText: "Password",
+                              hintStyle: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                        ),
                       ),
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account?  ",
-                            style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w400, fontSize: 12)),
-                          ),
-                          GestureDetector(
-                            onTap: () {
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  blurRadius: 10,
+                                  spreadRadius: 0,
+                                  offset: Offset(0, 3),
+                                  color: Color.fromRGBO(0, 0, 0, 0.15)),
+                            ]),
+                        child: TextFormField(
+                          controller: confirmPassController,
+                          cursorColor: Colors.yellow,
+                          decoration: InputDecoration(
+                              hintText: "Confirm Password",
+                              hintStyle: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide:
+                                    const BorderSide(color: Colors.red),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        width: 300,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromRGBO(14, 161, 125, 1),
+                        ),
+                        child: ElevatedButton(
+                            onPressed: () {
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (BuildContext context) {
                                 return const SignIn();
                               }));
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromRGBO(14, 161, 125, 1),
+                            ),
                             child: Text(
-                              "Sign In",
+                              "Sign Up",
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      color: Color.fromRGBO(14, 161, 125, 1),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12)),
-                            ),
-                          )
-                        ],
+                                      color:
+                                          Color.fromRGBO(255, 255, 255, 1),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16)),
+                            )),
                       ),
                     ],
                   ),
-                ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account?  ",
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12)),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return const SignIn();
+                          }));
+                        },
+                        child: Text(
+                          "Sign In",
+                          style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  color: Color.fromRGBO(14, 161, 125, 1),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12)),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

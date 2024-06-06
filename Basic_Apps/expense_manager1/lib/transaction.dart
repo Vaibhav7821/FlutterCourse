@@ -1,6 +1,8 @@
+import 'package:expense_manager1/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class Transaction extends StatefulWidget {
   const Transaction({super.key});
@@ -10,6 +12,162 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State {
+  // bool transaction = false;
+  // bool graph = false;
+  // bool category = false;
+  // bool trash = false;
+  // bool about = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: showDrawer(context),
+      appBar: AppBar(
+        actions: [
+          const SizedBox(
+            width: 60,
+          ),
+          Text(
+            "June 2022",
+            style: GoogleFonts.poppins(
+                textStyle:
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+          ),
+          const Spacer(),
+          const Icon(Icons.search),
+          const SizedBox(
+            width: 15,
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                height: 60,
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 10),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                              height: 45,
+                              width: 45,
+                              margin:
+                                  const EdgeInsets.only(right: 20, left: 15),
+                              child: Image.asset("assets/medicine.png")),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Medicine",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16)),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Lorem Ipsum is simply dummy text of the ",
+                                    style: GoogleFonts.poppins(
+                                        textStyle: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            color: Color.fromRGBO(0, 0, 0, 0.8),
+                                            fontSize: 10)),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          const Icon(
+                            Icons.remove_circle,
+                            color: Colors.orange,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "500",
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromRGBO(0, 0, 0, 1),
+                                    fontSize: 16)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 20),
+                          child: Text(
+                            "3 June | 11:50 AM",
+                            style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    color: Color.fromRGBO(0, 0, 0, 0.6),
+                                    fontSize: 10)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(thickness: 1),
+            ],
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: SizedBox(
+        height: 46,
+        width: 166,
+        child: Container(
+          decoration: const BoxDecoration(boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              spreadRadius: -5,
+              offset: Offset(0, 10),
+            )
+          ]),
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              showSheet();
+            },
+            backgroundColor: Colors.white,
+            label: const Text('Add Transaction'),
+            icon: Container(
+                height: 32,
+                width: 32,
+                decoration: const BoxDecoration(
+                    color: Color.fromRGBO(14, 161, 125, 1),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                )),
+          ),
+        ),
+      ),
+    );
+  }
+
   final TextEditingController categoryController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
@@ -49,7 +207,7 @@ class _TransactionState extends State {
                       Text(
                         "Date",
                         style: GoogleFonts.quicksand(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: const Color.fromARGB(255, 0, 0, 0),
                           fontWeight: FontWeight.w400,
                           fontSize: 18,
                         ),
@@ -245,7 +403,15 @@ class _TransactionState extends State {
                       ),
                       backgroundColor: const Color.fromRGBO(14, 161, 125, 1),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      amountController.clear();
+                      categoryController.clear();
+
+                      descriptionController.clear();
+
+                      dateController.clear();
+                      Navigator.of(context).pop();
+                    },
                     child: Text(
                       "Add",
                       style: GoogleFonts.inter(
@@ -260,12 +426,6 @@ class _TransactionState extends State {
           ),
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
     );
   }
 }
